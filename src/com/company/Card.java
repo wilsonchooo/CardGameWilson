@@ -1,9 +1,9 @@
 package com.company;
 
 public class Card {
-    private String rank;
-    private String suit;
-    private int pointValue;
+    public String rank;
+    public String suit;
+    public int pointValue;
 
     public Card (String rank, String suit, int pointValue)
     {
