@@ -3,19 +3,17 @@ package com.company;
 import java.util.ArrayList;
 
 public class Deck {
-    private ArrayList<Card> unDealt;
-    private ArrayList<Card> Dealt;
+    private ArrayList<Card> unDealt = new ArrayList<Card>();
+    private ArrayList<Card> Dealt = new ArrayList<Card>();
 
     public Deck(String[] rank, String[] suit, int[] pointValue) {
-        ArrayList<Card> unDealt = new ArrayList<Card>(rank.length);
 
         for (int i = 0; i < rank.length; i++) {
 
-            unDealt.get(i).rank = rank[i];
-            unDealt.get(i).suit = suit[i];
-            unDealt.get(i).pointValue = pointValue[i];
-
+            unDealt.add(new Card(rank[i],suit[i],pointValue[i]));
         }
+
+
     }
     public boolean isEmpty()
     {
@@ -33,10 +31,12 @@ public class Deck {
 
     public Card deal ()
     {
+
         if (isEmpty()==true)
         {
             return null;
         }
+        else
 
         while(unDealt.size()>0) {
             Card returned = unDealt.get(0);
@@ -48,23 +48,17 @@ public class Deck {
         return null;
     }
 
-    public void shuffle()
-    {
-        for (int i =0;i<Dealt.size();i++)
-        {
-            unDealt.add(Dealt.get(i));
-            unDealt.remove(i);
+    public void shuffle() {
 
-        }
+        unDealt.addAll(Dealt);
+        Dealt.clear();
 
-        for (int k=1;k<51;k++)
-        {
-            int r = (int)(Math.random()*k);
-            
-            Card temp = unDealt.get(k);
-            unDealt.set(k,unDealt.get(r));
-            unDealt.set(r,temp);
+        for (int k = 52; k > 0; k --) {
+            int random = (int) (Math.random() * (52));
 
+            Card temp = unDealt.get(random);
+            unDealt.set(random, unDealt.get(k));
+            unDealt.set(k, temp);
         }
     }
 }
